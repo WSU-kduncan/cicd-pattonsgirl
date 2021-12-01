@@ -17,8 +17,8 @@ jobs:
     steps:
       # checkout repo contents to runner
       - 
-	name: Checkout repo to runner
-	uses: actions/checkout@v2
+        name: Checkout repo to runner
+        uses: actions/checkout@v2
       # buildx is docker build with extra features (that we don't care about, but it is best 
       # 	documented practice to use it over plain docker build in a workflow)
       # 	BuildKit is designed to work well for building for multiple platforms and not 
