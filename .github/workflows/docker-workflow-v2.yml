@@ -8,7 +8,7 @@ on:
 # variables used in this workflow
 env:
   # variable holding my repo folder name (using DockerHub is assumed)
-  DOCKER_HUB_REPO: ${{ secrets.DOCKER_USERNAME }}/mysite
+  DOCKER_HUB_REPO: mysite
 jobs:
   build_and_push:
     name: Build docker image and push to Docker Hub
@@ -41,4 +41,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ env.DOCKER_HUB_REPO }}:latest
+          tags: ${{ secretes.DOCKERUSERNAME }}/${{ env.DOCKER_HUB_REPO }}:latest
