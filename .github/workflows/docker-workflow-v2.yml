@@ -1,3 +1,9 @@
+####
+# Created from:
+# https://github.com/docker/build-push-action
+# https://docs.docker.com/ci-cd/github-actions/
+####
+
 # GitHub Actions workflow name
 name: Docker-Login-Build-Push
 # event trigger(s)
@@ -9,6 +15,8 @@ on:
 env:
   # variable holding my repo folder name (using DockerHub is assumed)
   DOCKER_HUB_REPO: mysite
+# jobs - each jobs runs on a runner - parralel by deafult, can be dependent based on id
+#     https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobs
 jobs:
   build_and_push:
     name: Build docker image and push to Docker Hub
@@ -38,8 +46,12 @@ jobs:
       #    total list of updates between v1 & v2: https://github.com/docker/build-push-action/blob/master/UPGRADE.md
       - 
         name: Build and push
-        id: docker_build
+        # ID is used as a reference, from other jobs or steps
+        #    using step ids: https://docs.github.com/en/actions/learn-github-actions/contexts#steps-context
+        id: docker_build 
         uses: docker/build-push-action@v2
         with:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_HUB_REPO }}:latest
+          # Example getting fancy with tags: 
+          #   https://github.com/docker/build-push-action/blob/master/docs/advanced/tags-labels.md
